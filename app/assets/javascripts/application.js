@@ -30,8 +30,7 @@
 //= require marked
 //= require events
 
-//= require calendar
-//= require calendar-app
+//= require lodash
 
 //= require react
 //= require react_ujs

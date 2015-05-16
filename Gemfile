@@ -97,6 +97,9 @@ gem 'icalendar'
 # React
 gem 'react-rails', '~> 1.0'
 
+# Underscore
+gem 'lodash-rails'
+
 group :development do
   gem 'annotate', require: false
   gem 'quiet_assets'

@@ -237,6 +237,8 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.3.0)
       launchy (~> 2.2)
+    lodash-rails (3.7.0)
+      railties (>= 3.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mailchimp-api (2.0.6)
@@ -465,6 +467,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   letter_opener
+  lodash-rails
   mailchimp-api
   marked-rails
   mini_magick
