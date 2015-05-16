@@ -67,11 +67,9 @@ var EventHref = React.createClass({
 var CalendarWeek = React.createClass({
     render: function() {
         return  <div className="cal-row-fluid cal-before-eventlist">
-            {_.map(_.zip(_.range(this.props.start, this.props.end + 1),
-                           _.range(1, 8)),
-                  function(nums) {
-                      var dayOfWeek = "-day"+nums[1];
-                      var day = nums[0];
+            {_.map(this.props.dates,
+                  function(day) {
+                      var dayOfWeek = "-day" + (moment().year(this.props.year).month(this.props.month).date(day).day());
                       var date = this.props.year+"-"+this.props.month+"-"+day;
                       return <div className="cal-cell1 cal-cell" data-cal-row={dayOfWeek}>
                           <CalendarDay date={date} day={day} events={this.props.events}/>
@@ -98,8 +96,8 @@ var Calendar = React.createClass({
 
     getInitialState: function() {
         return {
-            year: 2015,
-            month: 5,
+            year: moment().year(),
+            month: moment().month(),
             events: [{
                 title: "JSNN",
                 link: "github.com",
@@ -110,10 +108,15 @@ var Calendar = React.createClass({
     },
 
     render: function() {
+        var daysInMonth = new Date(moment().year(), moment().month(), 0).getDate();
+        var days = _.range(1, daysInMonth + 1);
+        var weeks = _.groupBy(days, function(day) {return moment().day(day).week()});
         return <div className="cal-context" style={{width: '100%'}} id="calendar">
             <CalendarHeader/>
             <div className="cal-month-box">
-                <CalendarWeek start={10} end={16} events={this.state.events} year={this.state.year} month={this.state.month}/>
+                {_.map(weeks, function(days) {
+                    return <CalendarWeek dates={days} events={this.state.events} year={this.state.year} month={this.state.month}/>
+                }.bind(this))}
             </div>
         </div>
     }

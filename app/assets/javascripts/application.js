@@ -32,6 +32,9 @@
 
 //= require lodash
 
+//= require moment
+//= require moment/ru.js
+
 //= require react
 //= require react_ujs
 //= require components
