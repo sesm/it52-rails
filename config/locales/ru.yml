@@ -129,6 +129,7 @@ ru:
       add_event_button_title: Добавить мероприятие
       future_events: Будут
       past_events: Были
+      calendar: Каледнарь
     new:
       title: Новое мероприятие
     edit:
