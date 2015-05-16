@@ -14,29 +14,11 @@ var CalendarHeader = React.createClass({
 });
 
 var CalendarDay = React.createClass({
-    st : {"test": "123"},
     render: function() {
-        //console.log("events of day: " + this.props.events);
-        var eventsForDay = [];
-        var that = this;
-        $.each(this.props.events, function() {
-            var day = new Date($(this)[0].started_at).getDate();
-            if (day == that.props.day) {
-                console.log("day suites: " + day);
-                eventsForDay.push($(this)[0]);
-            }
-
-        });
-        console.log(eventsForDay);
-        //var st="123";
-
-        if (eventsForDay.length > 0) {
-            st = eventsForDay[0];
-            //that.state.eventForDay=eventsForDay[0];
-        } else {
-            st = {};
-        }
-        console.log(st);
+        var eventsFiltered = _.filter(this.props.events, function(event) {
+            var day = new Date(event.started_at_js).getDate();
+            return day == this.props.day;
+        }.bind(this));
 
         return <div className="cal-month-day cal-day-inmonth cal-day-weekend">
             <span data-original-title="" className="pull-right"
@@ -44,7 +26,9 @@ var CalendarDay = React.createClass({
                 data-cal-view="day"
                 data-toggle="tooltip" title="">{this.props.day}</span>
 
-            <EventHref event = {this.st}/>
+            {_.map(eventsFiltered, function(event) {
+                return <EventHref event={event}/>;
+            })}
         </div>
     }
 });
@@ -53,12 +37,13 @@ var EventHref = React.createClass({
     render: function() {
         console.log(this.props.event);
         if (this.props.event != {}) {
-            return <div className="events-list" data-cal-start="1362859200000" data-cal-end="1362945600000">
-                <a data-original-title={this.props.event.title} href={this.props.event.title} data-event-id="293" data-event-classname="event-warning" className="pull-left cal-event event-warning" data-toggle="tooltip" title=""></a>
+            return <div className="events-list"
+                data-cal-start={this.props.event.started_at_js}
+                data-cal-end={this.props.event.started_at_js}>
+                <a data-original-title={this.props.event.title} href={this.props.event.url} data-event-id="293" data-event-classname="event-warning" className="pull-left cal-event event-warning" data-toggle="tooltip" title=""></a>
             </div>
         } else {
-            return <div className="events-list" data-cal-start="1362859200000" data-cal-end="1362945600000">
-            </div>
+            return [];
         }
 
     }
@@ -82,13 +67,10 @@ var CalendarWeek = React.createClass({
 var Calendar = React.createClass({
     componentDidMount: function() {
         $.get("/api/v1/events", function(result) {
-            //var lastGist = result[0];
             if (this.isMounted()) {
-                console.log(result)
+                console.log(result);
                 this.setState({
                     events: result
-                    //username: lastGist.owner.login,
-                    //lastGistUrl: lastGist.html_url
                 });
             }
         }.bind(this));
@@ -98,12 +80,7 @@ var Calendar = React.createClass({
         return {
             year: moment().year(),
             month: moment().month(),
-            events: [{
-                title: "JSNN",
-                link: "github.com",
-                start: 1362859200000,
-                end: 1362945600000
-            }]
+            events: []
         }
     },
 
