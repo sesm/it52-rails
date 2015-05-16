@@ -38,10 +38,40 @@ var CalendarWeek = React.createClass({
 var Calendar = React.createClass({
     render: function() {
         return <div className="cal-context" style={{width: '100%'}} id="calendar">
+            <CalendarHeaderPanel/>
             <CalendarHeader/>
             <div className="cal-month-box">
                 <CalendarWeek/>
             </div>
+        </div>
+    }
+});
+
+var CalendarHeaderPanelTitle = React.createClass({
+    render: function() {
+        return <h3>{this.props.month} {this.props.year}</h3>;
+    }
+});
+
+var CalendarHeaderPanel = React.createClass({
+    render: function() {
+        return <div className="page-header">
+
+            <div className="pull-right form-inline">
+                <div className="btn-group">
+                    <button className="btn btn-primary" data-calendar-nav="prev">&lt;&lt; Prev</button>
+                    <button className="btn btn-default" data-calendar-nav="today">Today</button>
+                    <button className="btn btn-primary" data-calendar-nav="next">Next &gt;&gt;</button>
+                </div>
+                <div className="btn-group">
+                    <button className="btn btn-warning" data-calendar-view="year">Year</button>
+                    <button className="btn btn-warning active" data-calendar-view="month">Month</button>
+                    <button className="btn btn-warning" data-calendar-view="week">Week</button>
+                    <button className="btn btn-warning" data-calendar-view="day">Day</button>
+                </div>
+            </div>
+
+            <CalendarHeaderPanelTitle month="Marth" year="2015"/>
         </div>
     }
 });
