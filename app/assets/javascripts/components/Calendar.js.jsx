@@ -2,13 +2,13 @@
 var CalendarHeader = React.createClass({
     render: function() {
         return <div className="cal-row-fluid cal-row-head">
-            <div className="cal-cell1">Sunday</div>
             <div className="cal-cell1">Monday</div>
             <div className="cal-cell1">Tuesday</div>
             <div className="cal-cell1">Wednesday</div>
             <div className="cal-cell1">Thursday</div>
             <div className="cal-cell1">Friday</div>
             <div className="cal-cell1">Saturday</div>
+            <div className="cal-cell1">Sunday</div>
         </div>
     }
 });
@@ -54,20 +54,20 @@ var CalendarHeaderPanelTitle = React.createClass({
 });
 
 var CalendarHeaderPanel = React.createClass({
+    openPrev: function() {
+        console.log("open prev");
+    },
+    openNext: function() {
+        console.log("open next");
+    },
     render: function() {
         return <div className="page-header">
 
             <div className="pull-right form-inline">
                 <div className="btn-group">
-                    <button className="btn btn-primary" data-calendar-nav="prev">&lt;&lt; Prev</button>
+                    <button className="btn btn-primary" data-calendar-nav="prev" onClick={this.openPrev}>&lt;&lt; Prev</button>
                     <button className="btn btn-default" data-calendar-nav="today">Today</button>
-                    <button className="btn btn-primary" data-calendar-nav="next">Next &gt;&gt;</button>
-                </div>
-                <div className="btn-group">
-                    <button className="btn btn-warning" data-calendar-view="year">Year</button>
-                    <button className="btn btn-warning active" data-calendar-view="month">Month</button>
-                    <button className="btn btn-warning" data-calendar-view="week">Week</button>
-                    <button className="btn btn-warning" data-calendar-view="day">Day</button>
+                    <button className="btn btn-primary" data-calendar-nav="next" onClick={this.openNext}>Next &gt;&gt;</button>
                 </div>
             </div>
 
