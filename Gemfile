@@ -94,6 +94,9 @@ gem 'runtimeerror_notifier'
 # Utils
 gem 'icalendar'
 
+# React
+gem 'react-rails', '~> 1.0'
+
 group :development do
   gem 'annotate', require: false
   gem 'quiet_assets'

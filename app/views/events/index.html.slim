@@ -17,7 +17,7 @@
     li role="presentation"
       a href="#past_events" data-toggle="pill" = t('.past_events')
     li role="presentation"
-      a href="#past_events" data-toggle="pill" = t('.calendar')
+      a href="#calendar" data-toggle="pill" = t('.calendar')
   br
 
   .tab-content
@@ -25,3 +25,5 @@
       .events = render @events
     #past_events.tab-pane role="tabpanel"
       .events = render @past_events
+    #calendar.tab-pane role="tabpanel"
+      = react_component('Calendar')

@@ -29,4 +29,10 @@
 
 //= require marked
 //= require events
+
 //= require calendar
+//= require calendar-app
+
+//= require react
+//= require react_ujs
+//= require components
